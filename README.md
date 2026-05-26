@@ -13,7 +13,9 @@
 2. Загрузите папку целиком (или только `index.html` + `images/`).
 3. **Settings → Pages → Build and deployment → Source:** `Deploy from a branch`.
 4. Branch: `main`, folder: `/ (root)`.
-5. Сайт будет доступен по адресу `https://<username>.github.io/tatiana-yoga/`.
+5. Сайт: **https://utromaya-code.github.io/tatiana-yoga/**
+
+Репозиторий: **https://github.com/utromaya-code/tatiana-yoga**
 
 Для кастомного домена добавьте файл `CNAME` с именем домена.
 
