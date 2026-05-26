@@ -7,6 +7,13 @@
     <meta name="description" content="Татьяна Ищенко — преподаватель Универсальной йоги, сертификат Yoga Alliance RYS 500. Индивидуальные занятия онлайн и в Санкт-Петербурге, курсы с Андреем Лаппой, йога-туры в Индию.">
     <link rel="icon" href="images/profile.png" type="image/png">
 
+    <meta property="og:title" content="Татьяна Ищенко | Преподаватель йоги & Йогатерапевт">
+    <meta property="og:description" content="Универсальная йога и йогатерапия. Бережная отстройка асан, внимание к дыханию и восстановление ресурса вашего тела.">
+    <meta property="og:image" content="https://utromaya-code.github.io/tatiana-yoga/images/og.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://utromaya-code.github.io/tatiana-yoga/">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -25,6 +32,26 @@
         }
 
         html { scroll-behavior: smooth; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         body {
             font-family: var(--font-sans);
@@ -165,7 +192,7 @@
             inset: 0;
             background:
                 linear-gradient(105deg, rgba(20, 20, 18, 0.97) 42%, rgba(20, 20, 18, 0.55) 68%, rgba(20, 20, 18, 0.88) 100%),
-                url('images/profile.png') no-repeat right 15% center / auto 85vh;
+                url('images/hero.jpg') no-repeat right 20% center / cover;
             z-index: 0;
         }
 
@@ -521,11 +548,129 @@
         }
 
         .project-card--lappa {
-            background: url('images/profile.png') center 20% / cover no-repeat;
+            background: url('images/gallery-02.jpg') center 30% / cover no-repeat;
         }
 
         .project-card--india {
-            background: linear-gradient(135deg, #2a2418 0%, #1a1814 50%, #141412 100%);
+            background: url('images/gallery-05.jpg') center center / cover no-repeat;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+            border: 1px solid rgba(245, 242, 235, 0.04);
+            aspect-ratio: 4 / 5;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .gallery-item:nth-child(1) { grid-column: span 4; }
+        .gallery-item:nth-child(2) { grid-column: span 4; aspect-ratio: 1; }
+        .gallery-item:nth-child(3) { grid-column: span 4; }
+        .gallery-item:nth-child(4) { grid-column: span 3; aspect-ratio: 3 / 4; }
+        .gallery-item:nth-child(5) { grid-column: span 6; aspect-ratio: 16 / 10; }
+        .gallery-item:nth-child(6) { grid-column: span 3; aspect-ratio: 3 / 4; }
+
+        /* FAQ */
+        .faq-container { max-width: 700px; margin: 0 auto; }
+
+        details.faq-item {
+            background: var(--bg-accent);
+            margin-bottom: 15px;
+            border: 1px solid rgba(245, 242, 235, 0.05);
+            border-radius: 2px;
+            padding: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        details.faq-item[open] {
+            border-color: rgba(197, 168, 128, 0.3);
+        }
+
+        summary.faq-question {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            color: var(--text-primary);
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        summary.faq-question::-webkit-details-marker { display: none; }
+
+        summary.faq-question::after {
+            content: '+';
+            color: var(--color-gold);
+            font-size: 24px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        details.faq-item[open] summary.faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background-color: var(--bg-accent);
+            border-top: 1px solid rgba(245, 242, 235, 0.02);
+            border-bottom: 1px solid rgba(245, 242, 235, 0.02);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .testimonial-card {
+            border-left: 1px solid var(--color-gold);
+            padding: 8px 0 8px 28px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 15px;
+            line-height: 1.65;
+        }
+
+        .testimonial-author {
+            font-family: var(--font-serif);
+            font-size: 16px;
+            letter-spacing: 0.05em;
+            color: var(--color-gold);
         }
 
         .project-card:hover {
@@ -640,18 +785,22 @@
             .hero-bg {
                 background:
                     linear-gradient(rgba(20, 20, 18, 0.92), rgba(20, 20, 18, 0.97)),
-                    url('images/profile.png') no-repeat center 20% / cover;
+                    url('images/hero.jpg') no-repeat center 30% / cover;
             }
             .services-grid,
             .projects-grid { grid-template-columns: 1fr; }
             .about-grid { grid-template-columns: 1fr; gap: 48px; }
             .about-image::after { left: -18px; }
+            .gallery-item { grid-column: span 6 !important; aspect-ratio: 4 / 5 !important; }
+            .gallery-item:nth-child(5) { grid-column: span 12 !important; }
         }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .menu-toggle { display: block; }
             .features-list { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .gallery-item { grid-column: span 12 !important; }
             section { padding: 80px 0; }
         }
     </style>
@@ -663,8 +812,9 @@
             <a href="#" class="logo">Tatiana<span>.</span></a>
             <ul class="nav-links">
                 <li><a href="#about">О проводнике</a></li>
+                <li><a href="#gallery">Практика</a></li>
                 <li><a href="#services">Занятия</a></li>
-                <li><a href="#projects">Проекты</a></li>
+                <li><a href="#faq">Вопросы</a></li>
                 <li><a href="#contacts">Контакты</a></li>
             </ul>
             <button class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false">
@@ -676,8 +826,9 @@
     <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
         <ul>
             <li><a href="#about" class="mobile-link">О проводнике</a></li>
+            <li><a href="#gallery" class="mobile-link">Практика</a></li>
             <li><a href="#services" class="mobile-link">Занятия</a></li>
-            <li><a href="#projects" class="mobile-link">Проекты</a></li>
+            <li><a href="#faq" class="mobile-link">Вопросы</a></li>
             <li><a href="#contacts" class="mobile-link">Контакты</a></li>
         </ul>
     </nav>
@@ -695,12 +846,12 @@
                 </div>
             </div>
             <div class="hero-portrait">
-                <img src="images/profile.png" alt="Татьяна Ищенко — преподаватель йоги" width="380" height="380">
+                <img src="images/about.jpg" alt="Татьяна Ищенко — преподаватель йоги" width="380" height="480" loading="eager">
             </div>
         </div>
     </section>
 
-    <section class="for-whom" id="for-whom">
+    <section class="for-whom reveal" id="for-whom">
         <div class="container">
             <div class="section-header">
                 <span class="tag">Для кого</span>
@@ -723,11 +874,11 @@
         </div>
     </section>
 
-    <section id="about">
+    <section id="about" class="reveal">
         <div class="container">
             <div class="about-grid">
                 <div class="about-image">
-                    <img src="images/profile.png" alt="Татьяна Ищенко">
+                    <img src="images/about.jpg" alt="Татьяна Ищенко на практике йоги" loading="lazy">
                 </div>
                 <div class="about-text">
                     <div class="section-header left" style="margin-bottom: 16px;">
@@ -755,7 +906,24 @@
         </div>
     </section>
 
-    <section id="services">
+    <section id="gallery" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Практика</span>
+                <h2>Пространство тишины и движения</h2>
+            </div>
+            <div class="gallery-grid">
+                <figure class="gallery-item"><img src="images/gallery-01.jpg" alt="Татьяна — асана сидя" loading="lazy"></figure>
+                <figure class="gallery-item"><img src="images/gallery-02.jpg" alt="Татьяна — боковой наклон" loading="lazy"></figure>
+                <figure class="gallery-item"><img src="images/gallery-03.jpg" alt="Татьяна — глубокий наклон" loading="lazy"></figure>
+                <figure class="gallery-item"><img src="images/gallery-04.jpg" alt="Татьяна — поза бабочки" loading="lazy"></figure>
+                <figure class="gallery-item"><img src="images/gallery-05.jpg" alt="Татьяна — баланс в приседе" loading="lazy"></figure>
+                <figure class="gallery-item"><img src="images/gallery-06.jpg" alt="Татьяна — скрутка в стойке" loading="lazy"></figure>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="reveal">
         <div class="container">
             <div class="section-header">
                 <span class="tag">Направления работы</span>
@@ -790,7 +958,26 @@
         </div>
     </section>
 
-    <section id="projects">
+    <section id="testimonials" class="testimonials-section reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Отзывы</span>
+                <h2>Истории изменений</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">«После трёх месяцев регулярных занятий с Татьяной я наконец-то забыла, что такое постоянная боль в пояснице из-за сидячей работы. Практика очень мягкая, но тело после неё горит в хорошем смысле!»</p>
+                    <div class="testimonial-author">Елена К., дизайнер</div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">«Для меня йогатерапия стала спасением. Татьяна невероятно внимательна к деталям и анатомии. Онлайн-формат в Zoom оказался на удивление комфортным — правки по камере очень точные.»</p>
+                    <div class="testimonial-author">Мария Д., предприниматель</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal">
         <div class="container">
             <div class="section-header">
                 <span class="tag">Проекты</span>
@@ -814,7 +1001,39 @@
         </div>
     </section>
 
-    <section id="contacts" class="contact-section">
+    <section id="faq" class="reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Полезно знать</span>
+                <h2>Часто задаваемые вопросы</h2>
+            </div>
+
+            <div class="faq-container">
+                <details class="faq-item">
+                    <summary class="faq-question">Подойдут ли занятия для новичков?</summary>
+                    <div class="faq-answer">
+                        Да, абсолютно. На практиках я всегда даю несколько уровней модификации асан — от самых простых для начинающих до усложнённых вариантов. Ваш уровень гибкости не имеет значения, мы развиваем её в процессе.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">Что необходимо для первой практики?</summary>
+                    <div class="faq-answer">
+                        Для онлайн-занятий — удобная одежда, коврик и немного свободного пространства. На офлайн-встречах в Санкт-Петербурге всё оборудование (коврики, блоки, ремни) согласуем заранее в зависимости от места.
+                    </div>
+                </details>
+
+                <details class="faq-item">
+                    <summary class="faq-question">Есть ли противопоказания к йогатерапии?</summary>
+                    <div class="faq-answer">
+                        Йогатерапия — бережный подход, но при острых стадиях заболеваний, недавних операциях или серьёзных проблемах с позвоночником перед практикой обязательно проконсультируйтесь с врачом и предупредите меня лично.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts" class="contact-section reveal">
         <div class="container">
             <div class="section-header">
                 <span class="tag">Связаться</span>
@@ -869,6 +1088,17 @@
                 document.body.style.overflow = '';
             });
         });
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     </script>
 </body>
 </html>
