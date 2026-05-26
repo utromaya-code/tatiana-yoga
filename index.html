@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Татьяна Ищенко | Преподаватель Универсальной йоги</title>
-    <meta name="description" content="Татьяна Ищенко — преподаватель Универсальной йоги, сертификат Yoga Alliance RYS 500. Индивидуальные занятия онлайн и в Санкт-Петербурге, курсы с Андреем Лаппой, йога-туры в Индию.">
+    <meta name="description" content="Татьяна Ищенко — преподаватель Универсальной йоги, сертификат Yoga Alliance RYS 500. Индивидуальные занятия онлайн и в Санкт-Петербурге.">
     <link rel="icon" href="images/profile.png" type="image/png">
 
     <meta property="og:title" content="Татьяна Ищенко | Преподаватель йоги & Йогатерапевт">
@@ -22,13 +22,17 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --bg-main: #141412;
-            --bg-accent: #1D1D1B;
-            --text-primary: #F5F2EB;
-            --text-muted: #9E9A91;
-            --color-gold: #C5A880;
+            --bg-main: #121210;
+            --bg-accent: #191917;
+            --text-primary: #F7F5F0;
+            --text-muted: #A39F97;
+            --color-gold: #C9A983;
+            --color-gold-muted: rgba(201, 169, 131, 0.22);
             --font-serif: 'Cormorant Garamond', Georgia, serif;
             --font-sans: 'Manrope', system-ui, sans-serif;
+            --space-unit: clamp(1rem, 4vw, 1.75rem);
+            --container-max: 1140px;
+            --header-h: clamp(64px, 12vw, 80px);
         }
 
         html { scroll-behavior: smooth; }
@@ -39,277 +43,252 @@
                 animation-duration: 0.01ms !important;
                 transition-duration: 0.01ms !important;
             }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
+            .reveal { opacity: 1; transform: none; }
         }
 
         body {
             font-family: var(--font-sans);
-            background-color: var(--bg-main);
+            background: var(--bg-main);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
+        body.menu-open { overflow: hidden; }
+
         .container {
-            max-width: 1140px;
+            max-width: var(--container-max);
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 var(--space-unit);
+            width: 100%;
         }
 
-        /* Header */
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            line-height: 1.15;
+        }
+
+        h1 { font-size: clamp(32px, 6.5vw, 58px); }
+        h2 { font-size: clamp(28px, 4.5vw, 42px); }
+        h3 { font-size: clamp(22px, 3.5vw, 28px); font-weight: 400; color: var(--color-gold); }
+
+        .text-muted {
+            font-size: clamp(14px, 2.2vw, 16px);
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.65;
+        }
+
+        .tag {
+            font-size: clamp(10px, 1.6vw, 12px);
+            text-transform: uppercase;
+            letter-spacing: 0.28em;
+            color: var(--color-gold);
+            font-weight: 500;
+            display: block;
+            margin-bottom: clamp(0.75rem, 2vw, 1rem);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: clamp(14px, 2.8vw, 18px) clamp(22px, 5vw, 36px);
+            font-size: clamp(11px, 2vw, 12px);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-weight: 600;
+            border-radius: 2px;
+            transition: all 0.35s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--color-gold);
+            color: var(--bg-main);
+            border-color: var(--color-gold);
+        }
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--color-gold);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: rgba(247, 245, 240, 0.18);
+        }
+        .btn-secondary:hover {
+            border-color: var(--color-gold);
+            color: var(--color-gold);
+            background: rgba(201, 169, 131, 0.04);
+        }
+
+        .btn-full { width: 100%; }
+
+        /* Header & navigation */
         header {
             position: fixed;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 100;
-            padding: 22px 0;
-            background: rgba(20, 20, 18, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(245, 242, 235, 0.06);
+            inset: 0 0 auto 0;
+            z-index: 200;
+            padding: clamp(14px, 3vw, 22px) 0;
+            background: rgba(18, 18, 16, 0.88);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(247, 245, 240, 0.06);
             transition: padding 0.3s;
         }
-
-        header.scrolled { padding: 14px 0; }
+        header.scrolled { padding: 12px 0; }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
 
         .logo {
             font-family: var(--font-serif);
-            font-size: 20px;
-            font-weight: 400;
-            letter-spacing: 0.15em;
+            font-size: clamp(17px, 3.5vw, 21px);
+            letter-spacing: 0.12em;
             color: var(--text-primary);
             text-decoration: none;
             text-transform: uppercase;
+            position: relative;
+            z-index: 202;
+        }
+        .logo span { color: var(--color-gold); }
+
+        .menu-toggle-input { display: none; }
+
+        .menu-btn {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 202;
+            position: relative;
         }
 
-        .logo span { color: var(--color-gold); }
+        .menu-btn span,
+        .menu-btn span::before,
+        .menu-btn span::after {
+            display: block;
+            width: 22px;
+            height: 1.5px;
+            background: var(--text-muted);
+            transition: all 0.35s ease;
+            position: relative;
+        }
+        .menu-btn span::before,
+        .menu-btn span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+        }
+        .menu-btn span::before { top: -7px; }
+        .menu-btn span::after { top: 7px; }
 
         .nav-links {
             display: flex;
-            gap: 28px;
+            gap: clamp(1rem, 2.5vw, 2rem);
             list-style: none;
         }
 
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 11px;
+            font-size: clamp(10px, 1.8vw, 11px);
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.14em;
             transition: color 0.3s;
         }
-
         .nav-links a:hover { color: var(--color-gold); }
 
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 28px;
-            height: 20px;
-            position: relative;
-        }
-
-        .menu-toggle span,
-        .menu-toggle::before,
-        .menu-toggle::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 1.5px;
-            background: var(--text-primary);
-            transition: transform 0.3s, opacity 0.3s;
-        }
-
-        .menu-toggle::before { top: 0; }
-        .menu-toggle span { top: 50%; transform: translateY(-50%); }
-        .menu-toggle::after { bottom: 0; }
-
-        .menu-toggle.open::before { top: 50%; transform: translateY(-50%) rotate(45deg); }
-        .menu-toggle.open span { opacity: 0; }
-        .menu-toggle.open::after { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
-
-        .mobile-nav {
+        .nav-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            top: 70px;
-            background: rgba(20, 20, 18, 0.98);
-            z-index: 99;
-            padding: 40px 24px;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 199;
+            opacity: 0;
+            transition: opacity 0.35s;
         }
 
-        .mobile-nav.open { display: block; }
+        @media (max-width: 768px) {
+            .menu-btn { display: block; }
 
-        .mobile-nav ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: min(85vw, 320px);
+                height: 100dvh;
+                background: var(--bg-accent);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 0;
+                padding: var(--header-h) var(--space-unit) var(--space-unit);
+                transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                box-shadow: -12px 0 40px rgba(0, 0, 0, 0.45);
+                z-index: 201;
+            }
 
-        .mobile-nav a {
-            font-family: var(--font-serif);
-            font-size: 28px;
-            font-weight: 300;
-            color: var(--text-primary);
-            text-decoration: none;
-            letter-spacing: 0.05em;
-        }
+            .nav-links li { width: 100%; text-align: center; }
 
-        /* Hero */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 140px 0 80px;
-            overflow: hidden;
-        }
+            .nav-links a {
+                display: block;
+                font-family: var(--font-serif);
+                font-size: clamp(22px, 5vw, 28px);
+                font-style: italic;
+                text-transform: none;
+                letter-spacing: 0.04em;
+                padding: 14px 0;
+                color: var(--text-primary);
+            }
 
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(105deg, rgba(20, 20, 18, 0.97) 42%, rgba(20, 20, 18, 0.55) 68%, rgba(20, 20, 18, 0.88) 100%),
-                url('images/hero.jpg') no-repeat right 20% center / cover;
-            z-index: 0;
-        }
+            .menu-toggle-input:checked ~ .nav-links { right: 0; }
+            .menu-toggle-input:checked ~ .menu-btn span { background: transparent; }
+            .menu-toggle-input:checked ~ .menu-btn span::before {
+                transform: rotate(45deg);
+                top: 0;
+                background: var(--text-primary);
+            }
+            .menu-toggle-input:checked ~ .menu-btn span::after {
+                transform: rotate(-45deg);
+                top: 0;
+                background: var(--text-primary);
+            }
 
-        .hero-inner {
-            position: relative;
-            z-index: 1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-content { max-width: 580px; }
-
-        .hero-subtitle {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.28em;
-            color: var(--color-gold);
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .hero h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(36px, 5.5vw, 58px);
-            font-weight: 300;
-            line-height: 1.12;
-            margin-bottom: 24px;
-            letter-spacing: 0.01em;
-        }
-
-        .hero-desc {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 36px;
-            font-weight: 300;
-            max-width: 480px;
-        }
-
-        .hero-portrait {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-portrait img {
-            width: min(380px, 90%);
-            height: auto;
-            border-radius: 2px;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero-portrait::after {
-            content: '';
-            position: absolute;
-            width: min(380px, 90%);
-            aspect-ratio: 1;
-            border: 1px solid rgba(197, 168, 128, 0.25);
-            transform: translate(16px, 16px);
-            z-index: -1;
-            border-radius: 2px;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        /* Buttons */
-        .btn-primary {
-            display: inline-block;
-            background-color: var(--color-gold);
-            color: var(--bg-main);
-            text-decoration: none;
-            padding: 16px 34px;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 600;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            border: 1px solid var(--color-gold);
-        }
-
-        .btn-primary:hover {
-            background-color: transparent;
-            color: var(--color-gold);
-        }
-
-        .btn-secondary {
-            display: inline-block;
-            background-color: transparent;
-            color: var(--text-primary);
-            text-decoration: none;
-            padding: 14px 26px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 500;
-            border: 1px solid rgba(245, 242, 235, 0.2);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--color-gold);
-            color: var(--color-gold);
+            .menu-toggle-input:checked ~ .nav-overlay {
+                display: block;
+                opacity: 1;
+            }
         }
 
         /* Sections */
-        section { padding: 110px 0; }
+        section {
+            padding: clamp(64px, 11vw, 120px) 0;
+            overflow: hidden;
+        }
 
         .section-header {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: clamp(40px, 8vw, 68px);
             max-width: 620px;
             margin-left: auto;
             margin-right: auto;
@@ -321,252 +300,210 @@
             margin-right: 0;
         }
 
-        .section-header .tag {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: var(--color-gold);
-            margin-bottom: 14px;
-            display: block;
+        /* Hero */
+        .hero {
+            position: relative;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            padding: calc(var(--header-h) + 48px) 0 clamp(48px, 8vw, 80px);
         }
 
-        .section-header h2 {
-            font-family: var(--font-serif);
-            font-size: clamp(30px, 4vw, 42px);
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(105deg, rgba(18, 18, 16, 0.96) 38%, rgba(18, 18, 16, 0.5) 62%, rgba(18, 18, 16, 0.9) 100%),
+                url('images/hero.jpg') no-repeat 72% 30% / cover;
+            z-index: 0;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(32px, 6vw, 64px);
+            align-items: center;
+        }
+
+        .hero-content { max-width: 560px; }
+
+        .hero-subtitle {
+            font-size: clamp(10px, 1.8vw, 12px);
+            text-transform: uppercase;
+            letter-spacing: 0.26em;
+            color: var(--color-gold);
+            margin-bottom: clamp(16px, 3vw, 22px);
+            font-weight: 500;
+        }
+
+        .hero h1 { margin-bottom: clamp(16px, 3vw, 24px); }
+
+        .hero-desc {
+            font-size: clamp(14px, 2.2vw, 16px);
+            color: var(--text-muted);
+            margin-bottom: clamp(24px, 5vw, 36px);
             font-weight: 300;
-            letter-spacing: 0.03em;
+            max-width: 480px;
+            line-height: 1.65;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .hero-portrait {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-portrait-box {
+            width: min(100%, 380px);
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border-radius: 2px;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-portrait-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+        }
+
+        .hero-portrait::after {
+            content: '';
+            position: absolute;
+            width: min(100%, 380px);
+            aspect-ratio: 4 / 5;
+            border: 1px solid var(--color-gold-muted);
+            transform: translate(14px, 14px);
+            z-index: -1;
+            border-radius: 2px;
         }
 
         /* For whom */
         .for-whom {
             background: var(--bg-accent);
-            border-top: 1px solid rgba(245, 242, 235, 0.04);
-            border-bottom: 1px solid rgba(245, 242, 235, 0.04);
+            border-block: 1px solid rgba(247, 245, 240, 0.04);
         }
 
         .for-whom-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+            gap: clamp(16px, 3vw, 24px);
         }
 
         .for-whom-item {
-            padding: 28px 24px;
-            border: 1px solid rgba(245, 242, 235, 0.05);
+            padding: clamp(22px, 4vw, 30px);
+            border: 1px solid rgba(247, 245, 240, 0.05);
             border-radius: 2px;
-        }
-
-        .for-whom-item p {
-            font-size: 14px;
-            color: var(--text-muted);
-            font-weight: 300;
         }
 
         /* About */
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1.15fr;
-            gap: 72px;
+            grid-template-columns: 1fr 1.1fr;
+            gap: clamp(40px, 8vw, 80px);
             align-items: center;
         }
 
-        .about-image { position: relative; }
-
-        .about-image img {
-            width: 100%;
+        .about-image {
+            position: relative;
             max-width: 420px;
-            height: auto;
-            border-radius: 2px;
-            display: block;
             margin: 0 auto;
+            width: 100%;
+        }
+
+        .about-image-box {
+            aspect-ratio: 10 / 12;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .about-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
         }
 
         .about-image::after {
             content: '';
             position: absolute;
-            top: 18px;
-            left: calc(50% - 210px - 18px);
+            top: clamp(12px, 2vw, 20px);
+            left: clamp(-12px, -2vw, -20px);
             width: 100%;
-            max-width: 420px;
             height: 100%;
-            border: 1px solid rgba(197, 168, 128, 0.2);
+            border: 1px solid var(--color-gold-muted);
             z-index: -1;
+            border-radius: 2px;
         }
 
         .about-text h3 {
-            font-family: var(--font-serif);
-            font-size: 26px;
-            font-weight: 400;
-            margin-bottom: 20px;
-            color: var(--color-gold);
+            margin-bottom: clamp(14px, 2vw, 20px);
             line-height: 1.35;
         }
 
         .about-text p {
+            font-size: clamp(14px, 2.2vw, 15px);
             color: var(--text-muted);
-            font-size: 15px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             font-weight: 300;
         }
 
         .quote {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 21px;
+            font-size: clamp(18px, 3vw, 22px);
             color: var(--text-primary);
             border-left: 2px solid var(--color-gold);
-            padding-left: 22px;
-            margin: 32px 0;
+            padding-left: clamp(16px, 3vw, 24px);
+            margin: clamp(24px, 4vw, 32px) 0;
             line-height: 1.45;
         }
 
         .features-list {
             list-style: none;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-top: 28px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(10px, 2vw, 14px);
+            margin-top: clamp(20px, 4vw, 28px);
         }
 
         .features-list li {
-            font-size: 13px;
-            color: var(--text-primary);
+            font-size: clamp(12px, 2vw, 14px);
             display: flex;
             align-items: flex-start;
             gap: 10px;
             font-weight: 300;
+            line-height: 1.4;
         }
 
         .features-list li::before {
             content: '✦';
             color: var(--color-gold);
             font-size: 8px;
-            margin-top: 6px;
+            margin-top: 5px;
             flex-shrink: 0;
-        }
-
-        /* Services */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 28px;
-        }
-
-        .service-card {
-            background-color: var(--bg-accent);
-            padding: 42px 32px;
-            border-radius: 2px;
-            border: 1px solid rgba(245, 242, 235, 0.04);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .service-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(197, 168, 128, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-        }
-
-        .service-card h3 {
-            font-family: var(--font-serif);
-            font-size: 26px;
-            font-weight: 400;
-            margin-bottom: 8px;
-        }
-
-        .service-meta {
-            font-size: 13px;
-            color: var(--color-gold);
-            font-weight: 500;
-            margin-bottom: 20px;
-            letter-spacing: 0.04em;
-        }
-
-        .service-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            font-weight: 300;
-            flex-grow: 1;
-        }
-
-        .price-list {
-            list-style: none;
-            margin-bottom: 28px;
-            border-top: 1px solid rgba(245, 242, 235, 0.06);
-            padding-top: 16px;
-        }
-
-        .price-list li {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            padding: 8px 0;
-            color: var(--text-primary);
-            font-weight: 300;
-        }
-
-        .price-list li span:last-child {
-            color: var(--color-gold);
-            font-weight: 500;
-        }
-
-        .service-card .btn-secondary {
-            width: 100%;
-            text-align: center;
-        }
-
-        /* Projects */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 28px;
-        }
-
-        .project-card {
-            position: relative;
-            min-height: 320px;
-            padding: 48px 36px;
-            border-radius: 4px;
-            border: 1px solid rgba(197, 168, 128, 0.15);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(20, 20, 18, 0.95) 30%, rgba(20, 20, 18, 0.4) 100%);
-            z-index: 0;
-        }
-
-        .project-card--lappa {
-            background: url('images/gallery-02.jpg') center 30% / cover no-repeat;
-        }
-
-        .project-card--india {
-            background: url('images/gallery-05.jpg') center center / cover no-repeat;
         }
 
         /* Gallery */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            gap: 16px;
+            gap: clamp(10px, 2vw, 16px);
         }
 
         .gallery-item {
-            position: relative;
             overflow: hidden;
             border-radius: 2px;
-            border: 1px solid rgba(245, 242, 235, 0.04);
+            border: 1px solid rgba(247, 245, 240, 0.04);
             aspect-ratio: 4 / 5;
         }
 
@@ -574,40 +511,198 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            object-position: center;
+            transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.04);
-        }
+        .gallery-item:hover img { transform: scale(1.04); }
 
         .gallery-item:nth-child(1) { grid-column: span 4; }
         .gallery-item:nth-child(2) { grid-column: span 4; aspect-ratio: 1; }
         .gallery-item:nth-child(3) { grid-column: span 4; }
-        .gallery-item:nth-child(4) { grid-column: span 3; aspect-ratio: 3 / 4; }
+        .gallery-item:nth-child(4) { grid-column: span 3; }
         .gallery-item:nth-child(5) { grid-column: span 6; aspect-ratio: 16 / 10; }
-        .gallery-item:nth-child(6) { grid-column: span 3; aspect-ratio: 3 / 4; }
+        .gallery-item:nth-child(6) { grid-column: span 3; }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: clamp(20px, 4vw, 28px);
+        }
+
+        .service-card {
+            background: var(--bg-accent);
+            padding: clamp(28px, 5vw, 44px) clamp(22px, 4vw, 36px);
+            border-radius: 2px;
+            border: 1px solid rgba(247, 245, 240, 0.04);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+                        border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-gold-muted);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .service-card h3 { color: var(--text-primary); margin-bottom: 8px; }
+
+        .service-meta {
+            font-size: clamp(13px, 2vw, 14px);
+            color: var(--color-gold);
+            font-weight: 500;
+            margin-bottom: 18px;
+            letter-spacing: 0.04em;
+        }
+
+        .service-desc {
+            font-size: clamp(13px, 2vw, 14px);
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-weight: 300;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        .price-list {
+            list-style: none;
+            border-top: 1px solid rgba(247, 245, 240, 0.06);
+            padding-top: 14px;
+            margin-bottom: clamp(20px, 4vw, 28px);
+        }
+
+        .price-list li {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: clamp(13px, 2vw, 14px);
+            padding: 8px 0;
+            font-weight: 300;
+        }
+
+        .price-list li span:last-child {
+            color: var(--color-gold);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background: var(--bg-accent);
+            border-block: 1px solid rgba(247, 245, 240, 0.03);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: clamp(28px, 5vw, 40px);
+        }
+
+        .testimonial-card {
+            border-left: 2px solid var(--color-gold);
+            padding: 6px 0 6px clamp(20px, 4vw, 28px);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--text-muted);
+            font-size: clamp(14px, 2.2vw, 15px);
+            margin-bottom: 14px;
+            line-height: 1.65;
+        }
+
+        .testimonial-author {
+            font-family: var(--font-serif);
+            font-size: clamp(15px, 2.5vw, 16px);
+            color: var(--color-gold);
+            letter-spacing: 0.04em;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: clamp(20px, 4vw, 28px);
+        }
+
+        .project-card {
+            position: relative;
+            min-height: clamp(280px, 50vw, 340px);
+            padding: clamp(32px, 6vw, 48px) clamp(24px, 4vw, 36px);
+            border-radius: 4px;
+            border: 1px solid var(--color-gold-muted);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.35s, border-color 0.35s;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(18, 18, 16, 0.96) 25%, rgba(18, 18, 16, 0.35) 100%);
+            z-index: 0;
+        }
+
+        .project-card--lappa {
+            background: url('images/gallery-02.jpg') no-repeat 50% 25% / cover;
+        }
+
+        .project-card--india {
+            background: url('images/gallery-05.jpg') no-repeat 55% 40% / cover;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(201, 169, 131, 0.45);
+        }
+
+        .project-card > * { position: relative; z-index: 1; }
+
+        .project-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-size: clamp(24px, 4vw, 30px);
+        }
+
+        .project-card p {
+            font-size: clamp(13px, 2vw, 14px);
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+
+        .project-link {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--color-gold);
+        }
 
         /* FAQ */
         .faq-container { max-width: 700px; margin: 0 auto; }
 
         details.faq-item {
             background: var(--bg-accent);
-            margin-bottom: 15px;
-            border: 1px solid rgba(245, 242, 235, 0.05);
+            margin-bottom: 12px;
+            border: 1px solid rgba(247, 245, 240, 0.05);
             border-radius: 2px;
-            padding: 20px;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s;
         }
 
-        details.faq-item[open] {
-            border-color: rgba(197, 168, 128, 0.3);
-        }
+        details.faq-item[open] { border-color: var(--color-gold-muted); }
 
         summary.faq-question {
             font-family: var(--font-serif);
-            font-size: 20px;
+            font-size: clamp(17px, 3.2vw, 21px);
             color: var(--text-primary);
             cursor: pointer;
             list-style: none;
@@ -615,6 +710,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 16px;
+            padding: clamp(18px, 3vw, 22px) clamp(18px, 4vw, 26px);
         }
 
         summary.faq-question::-webkit-details-marker { display: none; }
@@ -622,130 +718,57 @@
         summary.faq-question::after {
             content: '+';
             color: var(--color-gold);
-            font-size: 24px;
+            font-size: 22px;
             flex-shrink: 0;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s;
         }
 
-        details.faq-item[open] summary.faq-question::after {
-            transform: rotate(45deg);
-        }
+        details.faq-item[open] summary.faq-question::after { transform: rotate(45deg); }
 
         .faq-answer {
-            margin-top: 15px;
-            font-size: 14px;
+            padding: 0 clamp(18px, 4vw, 26px) clamp(18px, 3vw, 24px);
+            font-size: clamp(14px, 2.2vw, 15px);
             color: var(--text-muted);
             font-weight: 300;
-            line-height: 1.6;
-        }
-
-        /* Testimonials */
-        .testimonials-section {
-            background-color: var(--bg-accent);
-            border-top: 1px solid rgba(245, 242, 235, 0.02);
-            border-bottom: 1px solid rgba(245, 242, 235, 0.02);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .testimonial-card {
-            border-left: 1px solid var(--color-gold);
-            padding: 8px 0 8px 28px;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            font-weight: 300;
-            color: var(--text-muted);
-            font-size: 15px;
-            margin-bottom: 15px;
             line-height: 1.65;
         }
 
-        .testimonial-author {
-            font-family: var(--font-serif);
-            font-size: 16px;
-            letter-spacing: 0.05em;
-            color: var(--color-gold);
-        }
-
-        .project-card:hover {
-            border-color: rgba(197, 168, 128, 0.4);
-            transform: translateY(-3px);
-        }
-
-        .project-card > * { position: relative; z-index: 1; }
-
-        .project-card .tag { margin-bottom: 12px; }
-
-        .project-card h3 {
-            font-family: var(--font-serif);
-            font-size: 30px;
-            font-weight: 300;
-            margin-bottom: 12px;
-            letter-spacing: 0.03em;
-        }
-
-        .project-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-            font-weight: 300;
-            margin-bottom: 20px;
-        }
-
-        .project-link {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--color-gold);
-        }
-
-        /* Contact */
+        /* Contacts */
         .contact-section {
-            background-color: var(--bg-accent);
-            border-top: 1px solid rgba(245, 242, 235, 0.03);
+            background: var(--bg-accent);
+            border-top: 1px solid rgba(247, 245, 240, 0.03);
         }
 
         .contact-intro {
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto clamp(28px, 6vw, 40px);
+            font-size: clamp(14px, 2.2vw, 15px);
             color: var(--text-muted);
             font-weight: 300;
-            max-width: 520px;
-            margin: 0 auto 36px;
-            text-align: center;
-            font-size: 15px;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 14px;
             flex-wrap: wrap;
+            gap: 12px;
         }
 
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            padding: 14px 24px;
-            border: 1px solid rgba(245, 242, 235, 0.08);
-            transition: all 0.3s ease;
-        }
+        .social-links .btn { min-width: 140px; }
 
-        .social-btn:hover {
-            border-color: var(--color-gold);
-            color: var(--color-gold);
+        .meta-note {
+            font-size: 10px;
+            color: var(--text-muted);
+            opacity: 0.75;
+            max-width: 560px;
+            margin: clamp(20px, 4vw, 28px) auto 0;
+            text-align: center;
+            line-height: 1.5;
         }
 
         .legal {
-            margin-top: 48px;
+            margin-top: clamp(32px, 6vw, 48px);
             text-align: center;
             font-size: 11px;
             color: var(--text-muted);
@@ -757,25 +780,15 @@
             text-decoration: underline;
             text-underline-offset: 3px;
         }
-
         .legal a:hover { color: var(--color-gold); }
 
-        .meta-note {
-            font-size: 10px;
-            color: var(--text-muted);
-            opacity: 0.7;
-            max-width: 560px;
-            margin: 20px auto 0;
-            text-align: center;
-        }
-
         footer {
-            padding: 36px 0;
-            border-top: 1px solid rgba(245, 242, 235, 0.03);
+            padding: clamp(28px, 5vw, 40px) 0;
+            border-top: 1px solid rgba(247, 245, 240, 0.03);
             text-align: center;
             font-size: 11px;
             color: var(--text-muted);
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
         }
 
         /* Responsive */
@@ -784,24 +797,39 @@
             .hero-portrait { display: none; }
             .hero-bg {
                 background:
-                    linear-gradient(rgba(20, 20, 18, 0.92), rgba(20, 20, 18, 0.97)),
-                    url('images/hero.jpg') no-repeat center 30% / cover;
+                    linear-gradient(to bottom, rgba(18, 18, 16, 0.82) 0%, rgba(18, 18, 16, 0.94) 55%, rgba(18, 18, 16, 0.98) 100%),
+                    url('images/hero.jpg') no-repeat 60% 22% / cover;
             }
-            .services-grid,
-            .projects-grid { grid-template-columns: 1fr; }
-            .about-grid { grid-template-columns: 1fr; gap: 48px; }
-            .about-image::after { left: -18px; }
+            .hero-content {
+                text-align: center;
+                margin: 0 auto;
+            }
+            .hero-desc { margin-inline: auto; }
+            .hero-actions { justify-content: center; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-image::after { left: 12px; }
             .gallery-item { grid-column: span 6 !important; aspect-ratio: 4 / 5 !important; }
-            .gallery-item:nth-child(5) { grid-column: span 12 !important; }
+            .gallery-item:nth-child(5) { grid-column: span 12 !important; aspect-ratio: 16 / 10 !important; }
         }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .menu-toggle { display: block; }
             .features-list { grid-template-columns: 1fr; }
-            .testimonials-grid { grid-template-columns: 1fr; }
+            .section-header.left { text-align: center; }
+            .section-header.left .tag { text-align: center; }
+            .about-text .features-list { text-align: left; }
             .gallery-item { grid-column: span 12 !important; }
-            section { padding: 80px 0; }
+        }
+
+        @media (max-width: 600px) {
+            .social-links {
+                flex-direction: column;
+                align-items: stretch;
+                max-width: 320px;
+                margin-inline: auto;
+            }
+            .social-links .btn { width: 100%; }
+            .hero-actions { flex-direction: column; }
+            .hero-actions .btn { width: 100%; }
         }
     </style>
 </head>
@@ -810,28 +838,21 @@
     <header id="header">
         <div class="container nav-container">
             <a href="#" class="logo">Tatiana<span>.</span></a>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle-input" aria-hidden="true">
+            <label for="menu-toggle" class="menu-btn" aria-label="Открыть меню"><span></span></label>
+            <label for="menu-toggle" class="nav-overlay" aria-hidden="true"></label>
+
             <ul class="nav-links">
-                <li><a href="#about">О проводнике</a></li>
-                <li><a href="#gallery">Практика</a></li>
-                <li><a href="#services">Занятия</a></li>
-                <li><a href="#faq">Вопросы</a></li>
-                <li><a href="#contacts">Контакты</a></li>
+                <li><a href="#about" class="nav-link">О проводнике</a></li>
+                <li><a href="#gallery" class="nav-link">Практика</a></li>
+                <li><a href="#services" class="nav-link">Занятия</a></li>
+                <li><a href="#projects" class="nav-link">Проекты</a></li>
+                <li><a href="#faq" class="nav-link">Вопросы</a></li>
+                <li><a href="#contacts" class="nav-link">Контакты</a></li>
             </ul>
-            <button class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false">
-                <span></span>
-            </button>
         </div>
     </header>
-
-    <nav class="mobile-nav" id="mobileNav" aria-hidden="true">
-        <ul>
-            <li><a href="#about" class="mobile-link">О проводнике</a></li>
-            <li><a href="#gallery" class="mobile-link">Практика</a></li>
-            <li><a href="#services" class="mobile-link">Занятия</a></li>
-            <li><a href="#faq" class="mobile-link">Вопросы</a></li>
-            <li><a href="#contacts" class="mobile-link">Контакты</a></li>
-        </ul>
-    </nav>
 
     <section class="hero">
         <div class="hero-bg" aria-hidden="true"></div>
@@ -841,12 +862,14 @@
                 <h1>Практика, выстроенная под вас</h1>
                 <p class="hero-desc">Преподаватель Универсальной йоги, ученица и организатор курсов Андрея Лаппы. Индивидуальные занятия онлайн и в Санкт-Петербурге — бережно, с учётом анатомии и вашего запроса.</p>
                 <div class="hero-actions">
-                    <a href="https://t.me/yogaparavani" target="_blank" rel="noopener" class="btn-primary">Записаться</a>
-                    <a href="#services" class="btn-secondary">Форматы и цены</a>
+                    <a href="https://t.me/yogaparavani" target="_blank" rel="noopener" class="btn btn-primary">Записаться</a>
+                    <a href="#services" class="btn btn-secondary">Форматы и цены</a>
                 </div>
             </div>
             <div class="hero-portrait">
-                <img src="images/about.jpg" alt="Татьяна Ищенко — преподаватель йоги" width="380" height="480" loading="eager">
+                <div class="hero-portrait-box">
+                    <img src="images/about.jpg" alt="Татьяна Ищенко — преподаватель йоги" width="380" height="475" loading="eager">
+                </div>
             </div>
         </div>
     </section>
@@ -858,18 +881,10 @@
                 <h2>Вам подойдут занятия со мной, если</h2>
             </div>
             <div class="for-whom-grid">
-                <div class="for-whom-item">
-                    <p>Хотите глубокую, структурированную практику Универсальной йоги — с внешними и внутренними техниками.</p>
-                </div>
-                <div class="for-whom-item">
-                    <p>Нужен индивидуальный ритм: программа под ваше тело, опыт и цели, а не «один коврик на всех».</p>
-                </div>
-                <div class="for-whom-item">
-                    <p>Цените бережный подход к позвоночнику, дыханию и восстановлению ресурса без перегруза.</p>
-                </div>
-                <div class="for-whom-item">
-                    <p>Готовы к регулярной практике — онлайн из любой точки мира или офлайн в Санкт-Петербурге.</p>
-                </div>
+                <div class="for-whom-item"><p class="text-muted">Хотите глубокую практику Универсальной йоги — с внешними и внутренними техниками.</p></div>
+                <div class="for-whom-item"><p class="text-muted">Нужен индивидуальный ритм: программа под ваше тело, опыт и цели.</p></div>
+                <div class="for-whom-item"><p class="text-muted">Цените бережный подход к позвоночнику, дыханию и восстановлению ресурса.</p></div>
+                <div class="for-whom-item"><p class="text-muted">Готовы к регулярной практике — онлайн или офлайн в Санкт-Петербурге.</p></div>
             </div>
         </div>
     </section>
@@ -878,21 +893,19 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-image">
-                    <img src="images/about.jpg" alt="Татьяна Ищенко на практике йоги" loading="lazy">
+                    <div class="about-image-box">
+                        <img src="images/about.jpg" alt="Татьяна Ищенко на практике йоги" loading="lazy">
+                    </div>
                 </div>
                 <div class="about-text">
-                    <div class="section-header left" style="margin-bottom: 16px;">
+                    <div class="section-header left">
                         <span class="tag">О проводнике</span>
                         <h2>Татьяна Ищенко</h2>
                     </div>
-                    <h3>Мягкое погружение в практику через понимание тела и дыхания</h3>
-                    <p>Преподаватель Универсальной йоги. Ученица Андрея Лаппы и организатор его обучающих курсов. Практикую внешние и внутренние практики Универсальной йоги. Преподаю с 2015 года.</p>
-                    <p>Мой опыт преподавания и личной практики позволяет выстраивать тренировочные программы бережно и эффективно — с учётом индивидуальных особенностей.</p>
-
-                    <div class="quote">
-                        «Йога адаптируется под человека. Через регулярные и мягкие усилия на коврике мы меняем качество жизни вне его».
-                    </div>
-
+                    <h3>Мягкое погружение через понимание тела и дыхания</h3>
+                    <p>Преподаватель Универсальной йоги. Ученица Андрея Лаппы и организатор его обучающих курсов. Преподаю с 2015 года.</p>
+                    <p>Мой опыт позволяет выстраивать программы бережно и эффективно — с учётом индивидуальных особенностей.</p>
+                    <div class="quote">«Йога адаптируется под человека. Через регулярные мягкие усилия на коврике мы меняем качество жизни вне его».</div>
                     <ul class="features-list">
                         <li>Сертификат Yoga Alliance RYS 500</li>
                         <li>Петербургская школа йоги</li>
@@ -917,8 +930,8 @@
                 <figure class="gallery-item"><img src="images/gallery-02.jpg" alt="Татьяна — боковой наклон" loading="lazy"></figure>
                 <figure class="gallery-item"><img src="images/gallery-03.jpg" alt="Татьяна — глубокий наклон" loading="lazy"></figure>
                 <figure class="gallery-item"><img src="images/gallery-04.jpg" alt="Татьяна — поза бабочки" loading="lazy"></figure>
-                <figure class="gallery-item"><img src="images/gallery-05.jpg" alt="Татьяна — баланс в приседе" loading="lazy"></figure>
-                <figure class="gallery-item"><img src="images/gallery-06.jpg" alt="Татьяна — скрутка в стойке" loading="lazy"></figure>
+                <figure class="gallery-item"><img src="images/gallery-05.jpg" alt="Татьяна — баланс" loading="lazy"></figure>
+                <figure class="gallery-item"><img src="images/gallery-06.jpg" alt="Татьяна — скрутка" loading="lazy"></figure>
             </div>
         </div>
     </section>
@@ -929,30 +942,28 @@
                 <span class="tag">Направления работы</span>
                 <h2>Индивидуальные занятия</h2>
             </div>
-
             <div class="services-grid">
                 <div class="service-card">
                     <h3>Онлайн</h3>
                     <div class="service-meta">1,5 часа · Zoom</div>
-                    <p class="service-desc">Полноценная практика из дома. Экономия времени на дорогу при сохранении обратной связи и внимания к вашей отстройке.</p>
+                    <p class="service-desc">Полноценная практика из дома с обратной связью и вниманием к вашей отстройке.</p>
                     <ul class="price-list">
                         <li><span>1 занятие</span><span>5 000 ₽</span></li>
                         <li><span>5 занятий</span><span>23 000 ₽</span></li>
                         <li><span>10 занятий</span><span>45 000 ₽</span></li>
                     </ul>
-                    <a href="https://t.me/yogaparavani" target="_blank" rel="noopener" class="btn-secondary">Оставить заявку</a>
+                    <a href="https://t.me/yogaparavani" target="_blank" rel="noopener" class="btn btn-secondary btn-full">Оставить заявку</a>
                 </div>
-
                 <div class="service-card">
                     <h3>Офлайн</h3>
                     <div class="service-meta">Санкт-Петербург · по договорённости</div>
-                    <p class="service-desc">Живая практика с личным сопровождением. Место проведения согласуем индивидуально под ваш комфорт и запрос.</p>
+                    <p class="service-desc">Живая практика с личным сопровождением. Место согласуем под ваш комфорт.</p>
                     <ul class="price-list">
                         <li><span>1 занятие</span><span>6 000 ₽</span></li>
                         <li><span>5 занятий</span><span>28 000 ₽</span></li>
                         <li><span>10 занятий</span><span>55 000 ₽</span></li>
                     </ul>
-                    <a href="https://t.me/yogaparavani" target="_blank" rel="noopener" class="btn-secondary">Оставить заявку</a>
+                    <a href="https://t.me/yogaparavani" target="_blank" rel="noopener" class="btn btn-secondary btn-full">Оставить заявку</a>
                 </div>
             </div>
         </div>
@@ -966,11 +977,11 @@
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">«После трёх месяцев регулярных занятий с Татьяной я наконец-то забыла, что такое постоянная боль в пояснице из-за сидячей работы. Практика очень мягкая, но тело после неё горит в хорошем смысле!»</p>
+                    <p class="testimonial-text">«После трёх месяцев регулярных занятий с Татьяной я наконец-то забыла постоянную боль в пояснице из-за сидячей работы. Практика очень мягкая, но тело после неё горит в хорошем смысле!»</p>
                     <div class="testimonial-author">Елена К., дизайнер</div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">«Для меня йогатерапия стала спасением. Татьяна невероятно внимательна к деталям и анатомии. Онлайн-формат в Zoom оказался на удивление комфортным — правки по камере очень точные.»</p>
+                    <p class="testimonial-text">«Для меня йогатерапия стала спасением. Татьяна невероятно внимательна к деталям и анатомии. Онлайн в Zoom оказался на удивление комфортным — правки по камере очень точные.»</p>
                     <div class="testimonial-author">Мария Д., предприниматель</div>
                 </div>
             </div>
@@ -983,7 +994,6 @@
                 <span class="tag">Проекты</span>
                 <h2>Курсы и путешествия</h2>
             </div>
-
             <div class="projects-grid">
                 <a href="https://taplink.cc/universalyogarussia" target="_blank" rel="noopener" class="project-card project-card--lappa">
                     <span class="tag">Обучение</span>
@@ -994,7 +1004,7 @@
                 <a href="https://telegra.ph/Volshebnaya-Kerala---strana-Bogov-10-02" target="_blank" rel="noopener" class="project-card project-card--india">
                     <span class="tag">Йога-тур</span>
                     <h3>Тур в Индию на аюрведу</h3>
-                    <p>Керала, 3–14 марта 2026. Практики, аюрведа и глубокое погружение в культуру Юга Индии.</p>
+                    <p>Керала, 3–14 марта 2026. Практики, аюрведа и погружение в культуру Юга Индии.</p>
                     <span class="project-link">Узнать программу →</span>
                 </a>
             </div>
@@ -1007,27 +1017,18 @@
                 <span class="tag">Полезно знать</span>
                 <h2>Часто задаваемые вопросы</h2>
             </div>
-
             <div class="faq-container">
                 <details class="faq-item">
                     <summary class="faq-question">Подойдут ли занятия для новичков?</summary>
-                    <div class="faq-answer">
-                        Да, абсолютно. На практиках я всегда даю несколько уровней модификации асан — от самых простых для начинающих до усложнённых вариантов. Ваш уровень гибкости не имеет значения, мы развиваем её в процессе.
-                    </div>
+                    <div class="faq-answer">Да, абсолютно. Я всегда даю несколько уровней модификации асан — от простых для начинающих до усложнённых. Ваш уровень гибкости не имеет значения, мы развиваем её в процессе.</div>
                 </details>
-
                 <details class="faq-item">
                     <summary class="faq-question">Что необходимо для первой практики?</summary>
-                    <div class="faq-answer">
-                        Для онлайн-занятий — удобная одежда, коврик и немного свободного пространства. На офлайн-встречах в Санкт-Петербурге всё оборудование (коврики, блоки, ремни) согласуем заранее в зависимости от места.
-                    </div>
+                    <div class="faq-answer">Для онлайн — удобная одежда, коврик и свободное пространство. На офлайн-встречах в Санкт-Петербурге оборудование согласуем заранее в зависимости от места.</div>
                 </details>
-
                 <details class="faq-item">
                     <summary class="faq-question">Есть ли противопоказания к йогатерапии?</summary>
-                    <div class="faq-answer">
-                        Йогатерапия — бережный подход, но при острых стадиях заболеваний, недавних операциях или серьёзных проблемах с позвоночником перед практикой обязательно проконсультируйтесь с врачом и предупредите меня лично.
-                    </div>
+                    <div class="faq-answer">При острых стадиях заболеваний, недавних операциях или серьёзных проблемах с позвоночником проконсультируйтесь с врачом и предупредите меня лично.</div>
                 </details>
             </div>
         </div>
@@ -1040,17 +1041,13 @@
                 <h2>Оставайтесь на связи</h2>
             </div>
             <p class="contact-intro">Задайте вопрос или запишитесь на занятие — напишите в Telegram или WhatsApp.</p>
-
             <div class="social-links">
-                <a href="https://t.me/yogaparavani" class="social-btn" target="_blank" rel="noopener">Telegram</a>
-                <a href="https://wa.me/79214117270?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C!%20%F0%9F%91%8B" class="social-btn" target="_blank" rel="noopener">WhatsApp</a>
-                <a href="https://www.instagram.com/yogaparavani" class="social-btn" target="_blank" rel="noopener">Instagram</a>
-                <a href="https://vk.com/ishchenkot" class="social-btn" target="_blank" rel="noopener">ВКонтакте</a>
-                <a href="https://taplink.cc/tatianaishchenko" class="social-btn" target="_blank" rel="noopener">Taplink</a>
+                <a href="https://t.me/yogaparavani" class="btn btn-primary" target="_blank" rel="noopener">Telegram</a>
+                <a href="https://wa.me/79214117270?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C!%20%F0%9F%91%8B" class="btn btn-secondary" target="_blank" rel="noopener">WhatsApp</a>
+                <a href="https://www.instagram.com/yogaparavani" class="btn btn-secondary" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://vk.com/ishchenkot" class="btn btn-secondary" target="_blank" rel="noopener">ВКонтакте</a>
             </div>
-
             <p class="meta-note">* Instagram принадлежит компании Meta, признанной экстремистской и запрещённой на территории РФ.</p>
-
             <div class="legal">
                 <p>ИНН 463304563024</p>
                 <p><a href="https://docs.google.com/document/d/11ArzFd_GQDCAF_aJC1TwSnThLOjrTqqbjUqAfHJFn_U/edit?usp=drivesdk" target="_blank" rel="noopener">Публичный договор оферты</a></p>
@@ -1066,26 +1063,20 @@
 
     <script>
         const header = document.getElementById('header');
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileNav = document.getElementById('mobileNav');
+        const menuToggle = document.getElementById('menu-toggle');
 
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 40);
         });
 
-        menuToggle.addEventListener('click', () => {
-            const open = menuToggle.classList.toggle('open');
-            mobileNav.classList.toggle('open', open);
-            menuToggle.setAttribute('aria-expanded', open);
-            mobileNav.setAttribute('aria-hidden', !open);
-            document.body.style.overflow = open ? 'hidden' : '';
+        menuToggle.addEventListener('change', () => {
+            document.body.classList.toggle('menu-open', menuToggle.checked);
         });
 
-        document.querySelectorAll('.mobile-link').forEach(link => {
+        document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
-                menuToggle.classList.remove('open');
-                mobileNav.classList.remove('open');
-                document.body.style.overflow = '';
+                menuToggle.checked = false;
+                document.body.classList.remove('menu-open');
             });
         });
 
@@ -1096,7 +1087,7 @@
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     </script>
