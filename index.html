@@ -524,6 +524,42 @@
         .gallery-item:nth-child(5) { grid-column: span 6; aspect-ratio: 16 / 10; }
         .gallery-item:nth-child(6) { grid-column: span 3; }
 
+        /* Video */
+        .video-section {
+            background: var(--bg-accent);
+            border-block: 1px solid rgba(247, 245, 240, 0.03);
+        }
+
+        .video-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid var(--color-gold-muted);
+            background: #0a0a09;
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-caption {
+            margin-top: clamp(16px, 3vw, 24px);
+            text-align: center;
+            max-width: 560px;
+            margin-inline: auto;
+        }
+
         /* Services */
         .services-grid {
             display: grid;
@@ -846,6 +882,7 @@
             <ul class="nav-links">
                 <li><a href="#about" class="nav-link">О проводнике</a></li>
                 <li><a href="#gallery" class="nav-link">Практика</a></li>
+                <li><a href="#video" class="nav-link">Видео</a></li>
                 <li><a href="#services" class="nav-link">Занятия</a></li>
                 <li><a href="#projects" class="nav-link">Проекты</a></li>
                 <li><a href="#faq" class="nav-link">Вопросы</a></li>
@@ -932,6 +969,27 @@
                 <figure class="gallery-item"><img src="images/gallery-04.jpg" alt="Татьяна — поза бабочки" loading="lazy"></figure>
                 <figure class="gallery-item"><img src="images/gallery-05.jpg" alt="Татьяна — баланс" loading="lazy"></figure>
                 <figure class="gallery-item"><img src="images/gallery-06.jpg" alt="Татьяна — скрутка" loading="lazy"></figure>
+            </div>
+        </div>
+    </section>
+
+    <section id="video" class="video-section reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="tag">Практика</span>
+                <h2>Видео-тренировка</h2>
+            </div>
+            <div class="video-wrapper">
+                <div class="video-embed">
+                    <iframe
+                        src="https://kinescope.io/embed/b7fhvniMsv1UKJZmQ6gNnk"
+                        title="Видео-тренировка с Татьяной Ищенко"
+                        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;"
+                        allowfullscreen
+                        loading="lazy"
+                    ></iframe>
+                </div>
+                <p class="video-caption text-muted">Запись практики — почувствуйте темп, дыхание и бережный подход к асанам. Для полноценных занятий с обратной связью запишитесь на индивидуальный формат.</p>
             </div>
         </div>
     </section>
